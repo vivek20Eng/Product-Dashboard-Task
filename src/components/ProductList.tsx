@@ -25,7 +25,7 @@ const ProductList: React.FC = () => {
     );
   }
   
-  if (error) return <div>Error: {error}</div>;
+  if (error) return <div className="grid place-content-center text-red-600 h-[50vh]">Error: {error}</div>;
 
   // Check if there are no filtered products
   if (filteredProducts.length === 0) {

@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { fetchProductById } from '../services/api';
 import { Product } from '../types';
 import { ArrowLeft } from 'lucide-react'; 
-import ProductDetailSkeleton from './ProductDetailSkeleton'; // Import the skeleton loader
+import ProductDetailSkeleton from './ProductDetailSkeleton'; 
 
 const ProductDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -26,18 +26,18 @@ const ProductDetail: React.FC = () => {
     getProduct();
   }, [id]);
 
-  if (loading) return <ProductDetailSkeleton />; // Show skeleton loader when loading
-  if (error) return <div>Error: {error}</div>;
+  if (loading) return <ProductDetailSkeleton />; 
+  if (error) return <div className="grid place-content-center text-red-600 h-[50vh]">Error: {error}</div>;
   if (!product) return <div>Product not found</div>;
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-8">
       <Link to="/" className="flex items-center text-blue-600 hover:underline mb-4">
         <ArrowLeft className="mr-2" size={24} /> 
         Back to Products
       </Link>
       <div className="flex flex-col md:flex-row">
-        <img src={product.image} alt={product.title} className="w-full md:w-1/2 object-contain" />
+        <img src={product.image} alt={product.title} className="h-[70vh] w-full md:w-1/2 object-contain" />
         <div className="md:ml-8 mt-4 md:mt-0">
           <h1 className="text-2xl font-bold mb-2">{product.title}</h1>
           <p className="text-gray-600 mb-2">{product.category}</p>

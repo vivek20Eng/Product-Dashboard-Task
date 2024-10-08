@@ -6,6 +6,9 @@
 
 Basic product dashboard built with React, Redux Toolkit, and Tailwind CSS. It fetches product data from the Fake Store API and implements search and category filtering.
 
+![Scrolling Window Animation](screenshots/dashboard1.png) 
+
+
 ## Features
 
 - Display a list of products with images, titles, prices, and categories
@@ -41,4 +44,8 @@ Basic product dashboard built with React, Redux Toolkit, and Tailwind CSS. It fe
 - React Router
 - Axios
 - Tailwind CSS
+## 🖼️ Screenshots
+
+![Scrolling Window Animation](screenshots/dashboard1.png) 
+![Scrolling Window Animation](screenshots/dashboard2.png)
 

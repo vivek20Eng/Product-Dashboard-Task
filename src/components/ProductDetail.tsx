@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { fetchProductById } from '../services/api';
 import { Product } from '../types';
-import { ArrowLeft } from 'lucide-react'; 
 import ProductDetailSkeleton from './ProductDetailSkeleton'; 
 
 const ProductDetail = () => {
@@ -31,13 +30,9 @@ const ProductDetail = () => {
   if (!product) return <div>Product not found</div>;
 
   return (
-    <div className="container mx-auto p-8">
-      <Link to="/" className="flex items-center text-blue-600 hover:underline mb-4">
-        <ArrowLeft className="mr-2" size={24} /> 
-        Back to Products
-      </Link>
-      <div className="flex flex-col md:flex-row">
-        <img src={product.image} alt={product.title} className="h-[70vh] w-full md:w-1/2 object-contain" />
+    <>
+      <div className="flex flex-col md:flex-row mt-8">
+        <img src={product.image} alt={product.title} className="h-[70vh] w-full md:w-1/2 object-contain border-2 p-6 border-gray-400/20" loading='lazy'/>
         <div className="md:ml-8 mt-4 md:mt-0">
           <h1 className="text-2xl font-bold mb-2">{product.title}</h1>
           <p className="text-gray-600 mb-2">{product.category}</p>
@@ -45,7 +40,7 @@ const ProductDetail = () => {
           <p className="text-gray-700">{product.description}</p>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

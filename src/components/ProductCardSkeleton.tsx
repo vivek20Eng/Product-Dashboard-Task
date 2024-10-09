@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ProductCardSkeleton: React.FC = () => {
+const ProductCardSkeleton = () => {
   return (
     <div className="border rounded-md p-4 shadow-md animate-pulse">
       <div className="bg-gray-300 h-48 w-full rounded-md mb-4"></div> 

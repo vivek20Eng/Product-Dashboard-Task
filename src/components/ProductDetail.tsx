@@ -5,7 +5,7 @@ import { Product } from '../types';
 import { ArrowLeft } from 'lucide-react'; 
 import ProductDetailSkeleton from './ProductDetailSkeleton'; 
 
-const ProductDetail: React.FC = () => {
+const ProductDetail = () => {
   const { id } = useParams<{ id: string }>();
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);

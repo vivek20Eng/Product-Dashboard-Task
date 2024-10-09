@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '../store';
 import { getProducts } from '../store/productSlice';
@@ -6,7 +6,7 @@ import ProductCard from './ProductCard';
 import ProductCardSkeleton from './ProductCardSkeleton';
 import { ShoppingBag } from 'lucide-react'; 
 
-const ProductList: React.FC = () => {
+const ProductList = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { filteredProducts, loading, error } = useSelector((state: RootState) => state.product);
 
@@ -14,20 +14,26 @@ const ProductList: React.FC = () => {
     dispatch(getProducts());
   }, [dispatch]);
 
-  if (loading) {
-    // Showing skeleton loaders instead of a loading message
-    return (
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
-        {Array.from({ length: 8 }).map((_, index) => (
-          <ProductCardSkeleton key={index} />
-        ))}
-      </div>
-    );
-  }
+  const skeletonLoaders = useMemo(() => (
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
+      {Array.from({ length: 8 }).map((_, index) => (
+        <ProductCardSkeleton key={index} />
+      ))}
+    </div>
+  ), []);
+
+  const productCards = useMemo(() => (
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
+      {filteredProducts.map(product => (
+        <ProductCard key={product.id} product={product} />
+      ))}
+    </div>
+  ), [filteredProducts]);
+
+  if (loading) return skeletonLoaders;
   
   if (error) return <div className="grid place-content-center text-red-600 h-[50vh]">Error: {error}</div>;
 
-  // Check if there are no filtered products
   if (filteredProducts.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center p-6 h-[60vh] md:h-[78vh]">
@@ -37,13 +43,7 @@ const ProductList: React.FC = () => {
     );
   }
 
-  return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
-      {filteredProducts.map(product => (
-        <ProductCard key={product.id} product={product} />
-      ))}
-    </div>
-  );
+  return productCards;
 };
 
 export default ProductList;

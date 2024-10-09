@@ -1,7 +1,7 @@
 import React from 'react';
 import ProductDetail from '../components/ProductDetail';
 
-const ProductDetailPage: React.FC = () => {
+const ProductDetailPage = () => {
   return (
     <div>
       <ProductDetail />
@@ -10,4 +10,3 @@ const ProductDetailPage: React.FC = () => {
 };
 
 export default ProductDetailPage;
-

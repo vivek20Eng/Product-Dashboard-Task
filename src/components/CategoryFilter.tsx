@@ -1,21 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCategoryFilter } from '../store/productSlice';
 import { RootState } from '../store';
 
-const CategoryFilter: React.FC = () => {
+const CategoryFilter = () => {
   const dispatch = useDispatch();
   const products = useSelector((state: RootState) => state.product.products);
-  const [categories, setCategories] = useState<string[]>([]);
 
-  useEffect(() => {
+  const categories = useMemo(() => {
     const uniqueCategories = Array.from(new Set(products.map(p => p.category)));
-    setCategories(uniqueCategories);
+    return uniqueCategories;
   }, [products]);
 
-  const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleCategoryChange = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
     dispatch(setCategoryFilter(e.target.value));
-  };
+  }, [dispatch]);
 
   return (
     <select
@@ -32,4 +31,4 @@ const CategoryFilter: React.FC = () => {
   );
 };
 
-export default CategoryFilter;
+export default React.memo(CategoryFilter);

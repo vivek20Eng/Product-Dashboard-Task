@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ProductDetailSkeleton: React.FC = () => {
+const ProductDetailSkeleton = () => {
   return (
     <div className="container mx-auto p-8 mt-12">
       <div className="flex flex-col md:flex-row">

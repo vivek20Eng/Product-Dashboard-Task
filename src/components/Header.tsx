@@ -2,7 +2,7 @@ import React from 'react';
 import SearchBar from './SearchBar';
 import CategoryFilter from './CategoryFilter';
 
-const Header: React.FC = () => {
+const Header = () => {
   return (
     <header className="bg-blue-600 text-white p-6 flex justify-between w-full flex-wrap">
       <h1 className="text-2xl align-middle font-bold w-full md:w-6/12 ">Product Dashboard</h1>

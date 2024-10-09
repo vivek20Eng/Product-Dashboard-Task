@@ -1,16 +1,16 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSearchTerm } from '../store/productSlice';
 import { RootState } from '../store';
 import { Search } from 'lucide-react'; 
 
-const SearchBar: React.FC = () => {
+const SearchBar = () => {
   const dispatch = useDispatch();
   const searchTerm = useSelector((state: RootState) => state.product.searchTerm);
 
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSearch = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setSearchTerm(e.target.value));
-  };
+  }, [dispatch]);
 
   return (
     <div className="relative h-full w-full">
@@ -26,4 +26,4 @@ const SearchBar: React.FC = () => {
   );
 };
 
-export default SearchBar;
+export default React.memo(SearchBar);

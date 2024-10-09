@@ -6,7 +6,7 @@ interface ProductCardProps {
   product: Product;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+const ProductCard = ({ product }: ProductCardProps) => {
   return (
     <Link to={`/product/${product.id}`} className="block">
       <div className="border rounded-lg p-4 hover:shadow-lg transition-shadow flex flex-col h-full">
@@ -14,6 +14,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           src={product.image}
           alt={product.title}
           className="w-full h-48 object-contain mb-4"
+          loading="lazy"
         />
         <h2 className="text-lg font-semibold mb-2 flex-grow truncate">
           {product.title}
@@ -25,4 +26,4 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   );
 };
 
-export default ProductCard;
+export default React.memo(ProductCard);
